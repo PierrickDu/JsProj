@@ -182,7 +182,7 @@ function afficheGameOver(ctx) {
 }
 
 function parseQuestion(){
-    fetch("C:/Users/pierr/Desktop/projet/js/questions.txt")
+    fetch("./questions.txt")
                 .then((res) => {
                     if (!res.ok) {
                         throw new Error
