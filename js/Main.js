@@ -182,18 +182,30 @@ function afficheGameOver(ctx) {
 }
 
 function parseQuestion(){
-    fetch("./questions.txt")
-                .then((res) => {
-                    if (!res.ok) {
-                        throw new Error
-                            (`HTTP error! Status: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then((data) => 
-                      console.log(data))
-                .catch((error) => 
-                       console.error("Unable to fetch data:", error)); 
+    const filePath = 'https://pierrickdu.github.io/JsProj/js/questions.txt'; // Chemin d'accès codé en dur
+      
+      const output = document.getElementById('output');
+      
+      // Créer un objet FileReader
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        const contents = event.target.result;
+        output.textContent = 'Contenu du fichier :\n' + contents;
+
+        // Parsez le contenu ici selon vos besoins
+        // Exemple : Diviser le contenu en lignes
+        const lines = contents.split('\n');
+        console.log('Lignes du fichier:', lines);
+      };
+
+      reader.onerror = (event) => {
+        console.error('Une erreur est survenue lors de la lecture du fichier.', event.target.error);
+        output.textContent = 'Une erreur est survenue lors de la lecture du fichier.';
+      };
+
+      // Lire le fichier en tant que texte
+      reader.readAsText(filePath); 
 }
 
 function question(){
